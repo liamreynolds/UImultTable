@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<!--FILE: http://weblab.cs.uml.edu/~lreynold/index.html
+91.61 GUI Programming I
+Assignment 8: Creating an Interactive Dynamic Table
+Liam Reynolds, University of MA, Lowell. CS.
+liam_reynolds@student.uml.edu
+Copyright(c) 25 November 2018. All rights reserved.-->
+<html lang="en">
+	<head>
+			<meta charset="utf-8">
+			<title>JQuery Validation mult. table</title>
+			<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+				integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+				crossorigin="anonymous">
+			<link rel = "stylesheet" type = "text/css" href= "table.css">
+      <link rel = "stylesheet" type = "text/css" href ="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/smoothness/jquery-ui.css">
+			<script src = "https://code.jquery.com/jquery-3.3.1.js"></script>
+			<script src = "https://code.jquery.com/jquery-1.11.1.min.js"></script>
+			<script src = "https://cdn.jsdelivr.net/jquery.validation/1.16.0/jquery.validate.min.js"></script>
+			<script src = "https://cdn.jsdelivr.net/jquery.validation/1.16.0/additional-methods.min.js"></script>
+      <script src = "https://code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>
+			<script src = "mult.js"> </script>
+			<script>
+					$().ready(function(){
+						//submit form if entered parameters pass requirements
+							$("#multForm").submit(function(e){
+								e.preventDefault();
+							}).validate({
+								//validate each input element using jquery validation rules
+									rules: {
+											loY: {
+												required: true,
+												min: -10,
+												max: 10
+											},
+											upY: {
+												required: true,
+												min: -10,
+												max: 10
+											},
+											loX: {
+												required: true,
+												min: -10,
+												max: 10
+											},
+											upX: {
+												required: true,
+												min: -10,
+												max: 10
+											}
+									},
+									//print formatted, specified error messages for each input element
+									messages: {
+										loY: {
+											required: "A lower vertical bound is required.",
+											min: "Bound must be greater than or equal to -10.",
+											max: "Bound must be less than or equal to 10."
+										},
+										upY: {
+											required: "An upper vertical bound is required.",
+											min: "Bound must be greater than or equal to -10.",
+											max: "Bound must be less than or equal to 10."
+										},
+										loX: {
+											required: "A lower horizontal bound is required.",
+											min: "Bound must be greater than or equal to -10.",
+											max: "Bound must be less than or equal to 10."
+										},
+										upX: {
+											required: "An upper horizontal bound is required.",
+											min: "Bound must be greater than or equal to -10.",
+											max: "Bound must be less than or equal to 10."
+										}
+									},
+									submitHandler: function(form){
+										//if form passes validation, create new table using specified values
+										eraseTable();
+										getValues();
+										return false;
+									}
+								})
+							});
+				</script>
+	</head>
+	<body>
+			<div class = "container">
+				<div class = "side">
+					<div id = "multiplication_table">
+						<table id = "multTable"> <!-- table is created without content to be added to dynamically-->
+						</table>
+					</div>
+				</div>
+				<div class = "mult">
+					<h1> mult. table </h1>
+					<form id = "multForm" name = "multForm" action = "" onsubmit="return false;" method = "get">  <!-- bootstrap form is used for table input-->
+						<div>
+							<p id = "intro"> Bounds must be integers between -10 and 10. <br>
+								Tables will be displayed dynamically and up to 20 tables can be saved below.</p>
+							<hr id = "formLine">
+							<label> vertical start :</label>
+							<input id = "loY" type = "number" class = "form-control valid"
+								name = "loY" placeholder = "lesser bound" value = "0">
+								<!-- use ui widget syntax to create sliders and handles for each input element -->
+							<div id = "slider_loY" class = "ui-slider ui-slider-horizontal ui-widget ui-widget-content ui-corner-all">
+								<span class = "ui-slider-handle ui-state-default ui-corner-all"></span>
+							</div>
+						</div>
+
+						<div>
+							<label> vertical end :</label>
+							<input id = "upY" type = "number" class = "form-control valid"
+								name = "upY" placeholder = "greater bound" value = "0">
+								<div id = "slider_upY" class = "ui-slider ui-slider-horizontal ui-widget ui-widget-content ui-corner-all">
+									<span class = "ui-slider-handle ui-state-default ui-corner-all"></span>
+								</div>
+						</div>
+
+						<div>
+							<label> horizontal start :</label>
+							<input id = "loX" type = "number" class = "form-control"
+								name = "loX" placeholder = "lesser bound" value = "0">
+								<div id = "slider_loX" class = "ui-slider ui-slider-horizontal ui-widget ui-widget-content ui-corner-all">
+									<span class = "ui-slider-handle ui-state-default ui-corner-all"></span>
+								</div>
+						</div>
+
+						<div>
+							<label> horizontal end :</label>
+							<input id = "upX" type = "number" class = "form-control"
+								name = "upX" placeholder = "greater bound" value = "0">
+								<div id = "slider_upX" class = "ui-slider ui-slider-horizontal ui-widget ui-widget-content ui-corner-all">
+									<span class = "ui-slider-handle ui-state-default ui-corner-all"></span>
+								</div>
+						</div>
+
+						<input id = "subForm" type = "button" value = "SAVE TABLE" onclick="createTab();">
+					</form>
+					<br>
+					<hr id = endDivide>
+				</div>
+
+				<div class = "tabcon">
+					<div id = "tabs"> <!--initialize empty list for tabs to be appended dynamically-->
+						<ul>
+						</ul>
+					</div>
+				</div>
+
+			</div>
+		<script>
+			$(document).ready(function(){
+				getValues();	//initialize table with 0's as input
+				slider();	//call slider when body elements are ready
+			});
+		</script>
+	</body>
+</html>

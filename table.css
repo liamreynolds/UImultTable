@@ -1,0 +1,110 @@
+/*FILE: http://weblab.cs.uml.edu/~lreynold/index.html
+91.61 GUI Programming I
+Assignment 8: Creating an Interactive Dynamic Table
+Liam Reynolds, University of MA, Lowell. CS.
+liam_reynolds@student.uml.edu
+Copyright(c) 25 November 2018. All rights reserved.*/
+
+body{
+  background: #181818;
+  font-family: tahoma;
+}
+.container{ /* grid containter aligns and formats table and form dynamically*/
+  margin: 4% auto 6% 10%;
+  display: grid;
+  align-content: center;
+  grid-gap: 6%;
+  grid-template-columns: [first] 30% [second] auto [last];
+  grid-template-areas:
+    "multForm display"
+}
+.mult{
+  grid-area: multForm;
+}
+.side{
+  grid-area: display;
+  margin: auto;
+}
+h1{
+  color: #F8F8F8;
+  font-weight: 500;
+  padding-bottom: 2%;
+}
+#multForm{
+  margin-top: 20px;
+  padding: 6%;
+  border-radius: 25px;
+  background-color: #F0F0F0;
+  font-size: 95%;
+  font-family: helvetica;
+}
+#intro{
+  font-size: 92%;
+  padding: 1%;
+  text-align: left;
+  margin-left: 6px;
+  margin-right: 6px;
+  margin-bottom: -4px;
+}
+#formLine{
+  border: .5px solid #BEBEBE;
+}
+#subForm{
+  margin-left: 6px;
+  margin-top: 4px;
+  font-family: helvetica;
+  font-weight: 600;
+}
+th, td{ /*base format for each cell of table */
+  border: 2.5px solid black;
+  padding: 6px;
+  text-align: center;
+  background-color: #F0F0F0;
+  font-size: 80%;
+}
+#multTable{
+  border: 1px solid black;
+  border-color: grey;
+  margin: auto;
+  padding: auto;
+  margin-top: 6%;
+}
+tr:first-child td{ /*content of first row and cell are highlighted*/
+  background-color: #303030;
+  font-weight: bold;
+  color: #E8E8E8;
+}
+td:nth-child(1){
+  background-color: #303030;
+  font-weight: bold;
+  color: #E8E8E8;
+}
+label.error{
+  color: red;
+  font-size: 90%;
+  padding-top: 2%;
+  padding-left: 2%;
+}
+input.error{
+  border:1px solid red;
+}
+#endDivide{
+  border: 0;
+  height: 1px;
+  background: #333;
+  background-image: linear-gradient(to right, #F0F0F0, #202020);
+}
+.ui-slider-horizontal{
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+.tabcon{
+  margin-top: -50px;
+  margin-left: -400px;
+  margin-right: 40px;
+  width: 800px;
+}
+#tabs{
+  background: #202020;
+  font-size: 80%;
+}
