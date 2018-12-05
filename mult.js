@@ -4,6 +4,7 @@ Assignment 8: Creating an Interactive Dynamic Table
 Liam Reynolds, University of MA, Lowell. CS.
 liam_reynolds@student.uml.edu
 Copyright(c) 25 November 2018. All rights reserved.*/
+
 function auto_submit() { //simple funciton that can be called to submit if form is valid,
 //used https://downing.io/GUI/assignment8.html as a guide
   if( $("form#multForm").valid() == true ) {
@@ -68,6 +69,7 @@ function getValues() {
   }
 }
 function slider(){
+  //used https://downing.io/GUI/assignment8.html as a guide for how slider calls are structured
   //assign slider for each input element to be updated dynamically
   $("#slider_loY").slider({
       min: -10,
@@ -127,7 +129,7 @@ function createTab(){
   $("#tabs").tabs();  //initialize tab UI
   var tab_count = $('div#tabs ul li.tab').length; // use tab_count to restrict amount of tabs
 
-  if( $("form#multForm").valid() == true && tab_count < 20) {  //only allow a tab creation if form is valid
+  if( $("form#multForm").valid() == true && tab_count < 20) {  //only allow a tab creation if form is valid and num_tabs is less than specified amount
     num_tabs++; //increment num_tabs to be used in append
     tab_count++;
     $("div#tabs ul").append("<li class = 'tab'><a href = '#tab-" + num_tabs + "'>" + "x : (" + lowX + "," + upX + ")"
@@ -138,7 +140,7 @@ function createTab(){
   }
 
   //https://downing.io/GUI/assignment8.html was used as a guide for tab deletion
-  $("#tabs").delegate("span.ui-icon-close", "click", function() {  //if close icon is click, remove tab
+  $("#tabs").delegate("span.ui-icon-close", "click", function() {  //if close icon is clicked, delete tab
     var panelID = $(this).closest("li").remove().attr("aria-controls");
     $("#" + panelID).remove();
     $("#tabs").tabs("refresh");

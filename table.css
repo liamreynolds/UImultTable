@@ -94,11 +94,11 @@ input.error{
   background: #333;
   background-image: linear-gradient(to right, #F0F0F0, #202020);
 }
-.ui-slider-horizontal{
+.ui-slider-horizontal{  /*display sliders under input elements with proper margins*/
   margin-top: 10px;
   margin-bottom: 10px;
 }
-.tabcon{
+.tabcon{  /*shift tab UI from its original right-corner position for better display*/
   margin-top: -50px;
   margin-left: -400px;
   margin-right: 40px;
